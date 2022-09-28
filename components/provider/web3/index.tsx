@@ -2,7 +2,7 @@
  * @Author: CoderDgx 1181571719@qq.com
  * @Date: 2022-09-27 16:38:13
  * @LastEditors: CoderDgx 1181571719@qq.com
- * @LastEditTime: 2022-09-28 14:10:04
+ * @LastEditTime: 2022-09-28 17:50:10
  * @FilePath: /nft-market/components/provider/web3/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -14,7 +14,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { createDefaultState, Web3State } from "./utils";
+import { createDefaultState, loadContract, Web3State } from "./utils";
 import { ethers } from "ethers";
 
 const Web3Context = createContext<Web3State>(createDefaultState());
@@ -23,15 +23,16 @@ const Web3Provider: FC<{ children: ReactNode }> = ({ children }) => {
   const [web3Api, setWeb3Api] = useState<Web3State>(createDefaultState());
 
   useEffect(() => {
-    function initWeb3() {
+    async function initWeb3() {
       const provider = new ethers.providers.Web3Provider(
         window.ethereum as any
       );
+      const contract = await loadContract("NftMarket", provider);
 
       setWeb3Api({
         ethereum: window.ethereum,
         provider,
-        contract: null,
+        contract,
         isLoading: false,
       });
     }
