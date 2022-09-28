@@ -10,8 +10,10 @@
   "dependencies": {
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^2.0.11",
+    "@metamask/providers": "^9.1.0",
     "@tailwindcss/forms": "^0.5.3",
     "eslint-config-prettier": "^8.5.0",
+    "ethers": "^5.7.1",
     "next": "latest",
     "react": "18.1.0",
     "react-dom": "18.1.0"

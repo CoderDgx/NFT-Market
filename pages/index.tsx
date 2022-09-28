@@ -2,7 +2,7 @@
  * @Author: CoderDgx 1181571719@qq.com
  * @Date: 2022-09-26 03:35:05
  * @LastEditors: CoderDgx 1181571719@qq.com
- * @LastEditTime: 2022-09-27 16:02:12
+ * @LastEditTime: 2022-09-28 14:52:10
  * @FilePath: /nft-market/pages/index.tsx
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -10,8 +10,19 @@ import type { NextPage } from "next";
 import { BaseLayout, NftList } from "@ui";
 import nfts from "../content/meta.json";
 import { NftMeta } from "@_types/nft";
+import { useWeb3 } from "components/provider/web3";
 
 const Home: NextPage = () => {
+  const { ethereum, provider, isLoading, contract } = useWeb3();
+
+  const getAccounts = async () => {
+    const accounts = await provider!.listAccounts();
+  };
+
+  if (provider) {
+    getAccounts();
+  }
+
   return (
     <BaseLayout>
       <div className="relative bg-gray-50 pt-16 pb-20 px-20 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
